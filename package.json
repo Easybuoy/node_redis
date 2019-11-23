@@ -19,7 +19,9 @@
   },
   "homepage": "https://github.com/Easybuoy/node_redis#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "mongoose": "^5.7.12",
+    "redis": "^2.8.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.0"
