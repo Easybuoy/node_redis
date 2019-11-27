@@ -22,17 +22,20 @@ app.get('/', (req, res) => {
       throw err;
     }
     if (cats) {
-        console.log(cats)
-      return res.json({ cats: JSON.parse(cats) });
+        return res.json({ cats: JSON.parse(cats) });
     } else {
-      console.log('aaa');
       Cat.find()
         .then(data => {
-          client.set('http://localhost:3000/', JSON.stringify(data), err => {
-            if (err) {
-              throw err;
+          client.setex(
+            'http://localhost:3000/',
+            10,
+            JSON.stringify(data),
+            err => {
+              if (err) {
+                throw err;
+              }
             }
-          });
+          );
           res.json({ cats: data });
         })
         .catch(err => res.json({ err }));
