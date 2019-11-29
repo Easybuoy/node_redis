@@ -62,4 +62,5 @@ app.post('/', (req, res) => {
     .catch(err => res.json({ err }));
 });
 
-app.listen(3000, () => console.log('app listening on 3000'));
+const PORT = 3000;
+app.listen(PORT, () => console.log(`app listening on ${PORT}`));
