@@ -1,9 +1,9 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const redis = require('redis');
+require('dotenv').config();
 
 const Cat = require('./models/cat');
-require('dotenv').config();
 
 const client = redis.createClient(6379, '127.0.0.1');
 
@@ -63,4 +63,4 @@ app.post('/', (req, res) => {
 });
 
 const PORT = 3000;
-app.listen(PORT, () => console.log(`app listening on ${PORT}`));
+app.listen(PORT, () => console.log(`app listening on ${PORT }`));
