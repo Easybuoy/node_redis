@@ -17,7 +17,6 @@ app.use(express.json());
 
 app.get('/', (req, res) => {
   client.get('http://localhost:3000/', (err, cats) => {
-    console.log(err);
     if (err) {
       throw err;
     }
