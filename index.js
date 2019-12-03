@@ -4,10 +4,10 @@ const redis = require('redis');
 require('dotenv').config();
 
 const Cat = require('./models/cat');
+const { DB_URL, REDIS_PORT, REDIS_ADDRESS} = process.env
+const client = redis.createClient(REDIS_PORT, REDIS_ADDRESS);
 
-const client = redis.createClient(6379, '127.0.0.1');
-
-mongoose.connect(process.env.DB_URL, {
+mongoose.connect(DB_URL, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
