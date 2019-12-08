@@ -4,7 +4,7 @@ const redis = require('redis');
 require('dotenv').config();
 
 const Cat = require('./models/cat');
-const { DB_URL, REDIS_PORT, REDIS_ADDRESS} = process.env
+const { DB_URL, REDIS_PORT, REDIS_ADDRESS } = process.env;
 const client = redis.createClient(REDIS_PORT, REDIS_ADDRESS);
 
 mongoose.connect(DB_URL, {
@@ -21,7 +21,7 @@ app.get('/', (req, res) => {
       throw err;
     }
     if (cats) {
-        return res.json({ cats: JSON.parse(cats) });
+      return res.json({ cats: JSON.parse(cats) });
     } else {
       Cat.find()
         .then(data => {
@@ -35,9 +35,9 @@ app.get('/', (req, res) => {
               }
             }
           );
-          res.json({ cats: data });
+          res.json({ cats: data, status: 'success' });
         })
-        .catch(err => res.json({ err }));
+        .catch(err => res.json({ err, status: 'error' }));
     }
   });
 });
@@ -57,9 +57,9 @@ app.post('/', (req, res) => {
     type
   };
   Cat.create(catsData)
-    .then(data => res.json({ cats: data }))
-    .catch(err => res.json({ err }));
+    .then(data => res.json({ cats: data, status: 'success' }))
+    .catch(err => res.json({ err, status: 'error' }));
 });
 
 const PORT = 3000;
-app.listen(PORT, () => console.log(`app listening on ${PORT }`));
+app.listen(PORT, () => console.log(`app listening on ${PORT}`));
